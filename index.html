@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="home">
+  <div class="hearts-field" id="heartsField"></div>
+  <div class="hero-wrap">
+    <div class="eyebrow-line">a little something for someone wonderful</div>
+    <p class="hero-msg" id="wishText">I may  not be the best person in your life, I would still try to be the best wishes of your day.</p>
+    <h1 class="hero-title">Happy<br>Birthday</h1>
+    <span class="hero-name">to my best friend</span>
+    <p class="hero-desc">You are in my heart you she'll be there forever , my greatest wishes is that you are happy when you think of me ,iam when I think of you</p>
+    <a class="hero-cta" href="gallery.html">Access to Heart</a>
+  </div>
+</section>
+
+<script>
+  const heartsField = document.getElementById('heartsField');
+  const heartSVG = (size, color) => `<svg width="${size}" height="${size}" viewBox="0 0 32 29" fill="${color}">
+      <path d="M23.6 0c-3.4 0-6.3 2-7.6 4.9C14.7 2 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 8.8 10.4 14.9 16 20.6 5.6-5.7 16-11.8 16-20.6C32 3.8 28.2 0 23.6 0z"/>
+    </svg>`;
+  const heartColors = ['#e8b4bd', '#f2c9d1', '#d4af7a', '#c97b8a'];
+
+  for (let i = 0; i < 26; i++){
+    const el = document.createElement('div');
+    el.className = 'heart';
+    const size = 14 + Math.random()*26;
+    const left = Math.random()*100;
+    const dur = 9 + Math.random()*10;
+    const delay = Math.random()*12;
+    const drift = (Math.random()*80 - 40).toFixed(0) + 'px';
+    const opacity = (0.4 + Math.random()*0.5).toFixed(2);
+    const color = heartColors[Math.floor(Math.random()*heartColors.length)];
+    el.style.left = left + '%';
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = delay + 's';
+    el.style.setProperty('--drift', drift);
+    el.style.setProperty('--o', opacity);
+    el.innerHTML = heartSVG(size, color);
+    heartsField.appendChild(el);
+  }
+</script>
+
+</body>
+</html>

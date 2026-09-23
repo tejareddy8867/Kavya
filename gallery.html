@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Memories — Heart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="index.html">HOME</a>
+  <a href="gallery.html" class="active">MY HEART</a>
+</nav>
+
+<section id="gallery">
+  <div class="gallery-title">My favourite chapter of life</div>
+  <div class="scroll-row" aria-hidden="false">
+    <div class="scroll-track" id="trackTop"></div>
+  </div>
+  <div class="scroll-row reverse">
+    <div class="scroll-track" id="trackBottom"></div>
+  </div>
+</section>
+
+<audio id="bgMusic" loop preload="none">
+  <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+<div class="music-ctrl" id="musicCtrl" onclick="toggleMusic()">
+  <span class="dot"></span>
+  <span id="musicLabel">Play music</span>
+</div>
+
+<script>
+  const totalPhotos = 20;
+  const PHOTO_EXT = 'jpg'; // change to 'svg', 'png', etc. depending on your image files
+
+  function buildRow(trackEl, ids){
+    // render the set twice back-to-back so the scroll loop is seamless
+    for (let rep = 0; rep < 2; rep++){
+      ids.forEach(i => {
+        const fig = document.createElement('div');
+        fig.className = 'scroll-photo';
+        const img = document.createElement('img');
+        img.src = `images/photo${i}.${PHOTO_EXT}`;
+        img.loading = 'lazy';
+        img.alt = 'memory photo ' + i;
+        fig.appendChild(img);
+        trackEl.appendChild(fig);
+      });
+    }
+  }
+
+  const half = totalPhotos / 2;
+  const topIds = Array.from({length: half}, (_, i) => i + 1);          // photos 1-10
+  const bottomIds = Array.from({length: half}, (_, i) => i + 1 + half); // photos 11-20
+
+  buildRow(document.getElementById('trackTop'), topIds);
+  buildRow(document.getElementById('trackBottom'), bottomIds);
+
+  const audio = document.getElementById('bgMusic');
+  const musicCtrl = document.getElementById('musicCtrl');
+  const musicLabel = document.getElementById('musicLabel');
+  let playing = false;
+
+  // Try to start music automatically as soon as the page loads.
+  // Most browsers only allow this if the tab isn't muted/blocked by autoplay policy —
+  // if it's blocked, we fall back to the "Tap to play" button below.
+  window.addEventListener('load', () => {
+    audio.play().then(() => {
+      playing = true;
+      musicCtrl.classList.add('playing');
+      musicLabel.textContent = 'Pause music';
+    }).catch(() => {
+      playing = false;
+      musicLabel.textContent = 'Tap to play music';
+    });
+  });
+
+  function toggleMusic(){
+    if (!playing){
+      audio.play().then(() => {
+        playing = true;
+        musicCtrl.classList.add('playing');
+        musicLabel.textContent = 'Pause music';
+      }).catch(() => {
+        musicLabel.textContent = 'Tap to play';
+      });
+    } else {
+      audio.pause();
+      playing = false;
+      musicCtrl.classList.remove('playing');
+      musicLabel.textContent = 'Play music';
+    }
+  }
+</script>
+
+</body>
+</html>
