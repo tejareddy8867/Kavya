@@ -24,7 +24,7 @@
 </section>
 
 <audio id="bgMusic" loop preload="none">
-  <source src="music/song.mp3" type="audio/mpeg">
+  <source src="song.mp3" type="audio/mpeg">
 </audio>
 <div class="music-ctrl" id="musicCtrl" onclick="toggleMusic()">
   <span class="dot"></span>
@@ -42,7 +42,7 @@
         const fig = document.createElement('div');
         fig.className = 'scroll-photo';
         const img = document.createElement('img');
-        img.src = `images/photo${i}.${PHOTO_EXT}`;
+        img.src = `photo${i}.${PHOTO_EXT}`;
         img.loading = 'lazy';
         img.alt = 'memory photo ' + i;
         fig.appendChild(img);
