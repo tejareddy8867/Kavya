@@ -41,7 +41,7 @@ html,body{height:100%;overflow-x:hidden;background:var(--wine-deep);font-family:
   overflow:hidden;
   background-image:
     linear-gradient(160deg, rgba(30,8,15,0.78), rgba(30,8,15,0.55) 45%, rgba(30,8,15,0.85)),
-    url('images/photo3.jpg');
+    url('photo3.jpg');
   background-size:cover;
   background-position:center;
   display:flex;
